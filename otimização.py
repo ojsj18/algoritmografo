@@ -18,15 +18,12 @@ lista = np.copy(entrada)
 
 #b tem saida um apenas na entrada e na saida, onde a soma das entradas e das saidas tem que ser ==1
 bezinho = np.zeros(n,int)
-bezinho[0]=1
-bezinho[n-1] = 1
+bezinho[ini-1]=peso
+bezinho[fim-1] =peso
 
 azinho = []
 cezinho = dict()
 nos = dict()
-
-#criando as linhas correspondentes para cada nó
-
 
 #criando um dicionario com os indices das arestas como keys
 for i in range (0,len(lista),3):
@@ -61,7 +58,7 @@ nokeys2.append(cezinho.values())
 
 #as entradas e as saidas são uma soma, arruma com o -1
 azinho = np.copy(nokeys)
-azinho[0] = -1 * azinho[0]
+azinho[ini-1] = -1 * azinho[ini-1]
 cezinho = np.copy(nokeys2)
 
 a = azinho
