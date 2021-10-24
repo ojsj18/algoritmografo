@@ -42,9 +42,15 @@ for i in range (0,len(lista),3):
     j=aux[0]+aux[1]
     for no in range(1,n+1):
         if int(aux[0])==no:
-            azinho[no-1][j]= -1
+            if ini<fim:
+                azinho[no-1][j]= -1 # os if definem a orientação do grafo baseado do pontp de saida e entreada
+            else:
+                azinho[no-1][j]= 1
         if int(aux[1])==no:
-            azinho[no-1][j]= 1
+            if ini<fim:
+                azinho[no-1][j]= 1
+            else:
+                azinho[no-1][j]= -1
 
 #transformando o dicionario em um array
 nokeys= list()
@@ -53,7 +59,6 @@ nokeys2= list()
 for i in range(0,len(azinho)):
     nokeys.append(azinho[i].values())
 
-
 nokeys2.append(cezinho.values())
 
 #as entradas e as saidas são uma soma, arruma com o -1
@@ -61,11 +66,15 @@ azinho = np.copy(nokeys)
 azinho[ini-1] = -1 * azinho[ini-1]
 cezinho = np.copy(nokeys2)
 
+#caso esteja em sentido contrario, arruma o sentido com -1
+
+
+
 a = azinho
 b = bezinho
 c = cezinho
 
-print(nos)
+print(nos.keys())
 print(azinho)
 print(bezinho)
 print(cezinho)
