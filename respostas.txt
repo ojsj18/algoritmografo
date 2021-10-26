@@ -1,0 +1,9 @@
+exemplo = 90
+grafodaimagem = 90
+exemploinvertido = 30
+começadomeio 50
+grafodesorientado = 90
+grafoforadeordem = 90
+grafoforadeordem2 =  50
+grafosentidotrocado = 80
+grafovariaspontas = 15

@@ -7,10 +7,9 @@ entrada = sys.stdin.read().split()
 n, e = int(entrada[0]), int(entrada[1]) #numero de nos e arestas
 del(entrada[0],entrada[0])
 
-iniciofimpeso = entrada[0:3]
-ini = int(iniciofimpeso[0])
-fim = int(iniciofimpeso[1])
-peso = int(iniciofimpeso[2])
+ini = int(entrada[0])
+fim = int(entrada[1])
+peso = int(entrada[2])
 del(entrada[0:3])
 
 #criando representação do grafo em uma matriz
@@ -18,8 +17,8 @@ lista = np.copy(entrada)
 
 #b tem saida um apenas na entrada e na saida, onde a soma das entradas e das saidas tem que ser ==1
 bezinho = np.zeros(n,int)
-bezinho[ini-1]=peso
-bezinho[fim-1] =peso
+bezinho[ini-1]= peso
+bezinho[fim-1]= peso
 
 azinho = []
 cezinho = dict()
@@ -63,16 +62,20 @@ nokeys2.append(cezinho.values())
 
 #as entradas e as saidas são uma soma, arruma com o -1
 azinho = np.copy(nokeys)
-azinho[ini-1] = -1 * azinho[ini-1]
+#azinho[ini-1] = -1 * azinho[ini-1]
+for i in range(0,e):
+    if int(azinho[ini-1][i]) == -1:
+        azinho[ini-1][i] = 1
+for i in range(0,e):
+    if int(azinho[fim-1][i]) == -1:
+        azinho[fim-1][i] = 1
+
 cezinho = np.copy(nokeys2)
-
-#caso esteja em sentido contrario, arruma o sentido com -1
-
-
 
 a = azinho
 b = bezinho
 c = cezinho
+
 
 print(nos.keys())
 print(azinho)
