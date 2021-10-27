@@ -1,6 +1,6 @@
 exemplo = 50 
 grafodaimagem = 90
-exemploinvertido = 30
+exemploinvertido = 50
 começadomeio 50
 grafodesorientado = 90
 grafoforadeordem = 90
