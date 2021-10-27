@@ -1,4 +1,4 @@
-exemplo = 90
+exemplo = 50 
 grafodaimagem = 90
 exemploinvertido = 30
 começadomeio 50
