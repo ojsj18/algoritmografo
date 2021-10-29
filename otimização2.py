@@ -35,6 +35,9 @@ for i in range (0,len(lista),3):
     x = str(aux[0]+aux[1])
     nos[x]=0
     cezinho[x]=lista[i+2]
+    x = str(aux[1]+aux[0])
+    nos[x]=0
+    cezinho[x]=lista[i+2]
 
 #um vetor correspondente para cada possibilidade de aresta
 for i in range(0,n):
@@ -44,11 +47,14 @@ for i in range(0,n):
 for i in range (0,len(lista),3):
     aux=lista[i:i+3]
     j=aux[0]+aux[1]
+    k=aux[1]+aux[0]
     for no in range(1,n+1):
         if int(aux[0])==no:
-                azinho[no-1][j]= -1 # os if definem a orientação do grafo baseado do pontp de saida e entreada
+            azinho[no-1][j]= "+1" # os if definem a orientação do grafo baseado do ponto de saida e entrada
+            azinho[no-1][k]= -1
         if int(aux[1])==no:
-                azinho[no-1][j]= 1
+            azinho[no-1][j]= -1
+            azinho[no-1][k]= "+1"
 
 #transformando o dicionario em um array
 nokeys= list()
@@ -61,8 +67,6 @@ nokeys2.append(cezinho.values())
 
 #as entradas e as saidas são uma soma, arruma com o -1
 azinho = np.copy(nokeys)
-#azinho[ini-1] = -1 * azinho[ini-1]
-
 cezinho = np.copy(nokeys2[0])
 #restrições
 a = azinho
@@ -71,20 +75,16 @@ b = bezinho
 #função objetivo
 c = cezinho
 
-
-#print(nos.keys())
-#print(azinho)
-#print(bezinho)
-#print(cezinho)
-
-
-from scipy.optimize import linprog
-res = linprog(c, A_eq=a, b_eq=b, method='simplex',bounds=(None,None),options={'presolve':False})
-listax = res.x
-resposta = 0
-
-# aqui eu calculo com os pesos e os X absolutos
-for i in range(0,e):
-    resposta = resposta + abs(listax[i]) * int(c[i])
-
-print(resposta)
+indices = nos.keys()
+linha = str()
+objetiva = "min:("
+for j in range(0,e*2):
+    objetiva = objetiva+"+"+cezinho[j]+"x"+indices[j]+" "
+objetiva = objetiva+")"
+print(objetiva)
+for j in range(0,n):
+    for i in range(0,e*2):
+        if int(azinho[j][i]) != 0:
+            linha = linha+str(azinho[j][i])+"x"+indices[i]+" "
+    linha= linha+"= "+str(bezinho[j])+";"+"\n"
+print(linha)
