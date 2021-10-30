@@ -18,73 +18,46 @@ peso = int(entrada[2])
 del(entrada[0:3])
 
 #criando representação do grafo em uma matriz
-lista = np.copy(entrada)
 
+lista = np.copy(entrada)
 #b tem saida um apenas na entrada e na saida, onde a soma das entradas e das saidas tem que ser ==1
 bezinho = np.zeros(n,int)
 bezinho[ini-1]= -1*peso
 bezinho[fim-1]= peso
 
-azinho = []
-cezinho = dict()
-nos = dict()
+azinho = np.zeros((n,n),int)
+cezinho = dict()  
 
-#criando um dicionario com os indices das arestas como keys
-for i in range (0,len(lista),3):
-    aux = lista[i:i+3]
-    x = str(aux[0]+aux[1])
-    nos[x]=0
-    cezinho[x]=lista[i+2]
-
-#um vetor correspondente para cada possibilidade de aresta
-for i in range(0,n):
-    azinho.append(nos.copy())
-
-# se estiver saindo do nó == -1 se estiver chegando no nó == 1
+# onde existe aresta == 1 depois na hora de imprimir existe sempre o inverso
 for i in range (0,len(lista),3):
     aux=lista[i:i+3]
-    j=aux[0]+aux[1]
+    j=int(aux[0])
+    k=int(aux[1])
+    x = str(aux[0]+aux[1])
+    z = str(aux[1]+aux[0])
     for no in range(1,n+1):
         if int(aux[0])==no:
-                azinho[no-1][j]= -1 # os if definem a orientação do grafo baseado do pontp de saida e entreada
+            azinho[no-1][k-1]= 1 
         if int(aux[1])==no:
-                azinho[no-1][j]= 1
+            azinho[k-1][j-1]= 1
+    cezinho[x]=aux[2]
+    cezinho[z]=aux[2]
 
-#transformando o dicionario em um array
-nokeys= list()
-nokeys2= list()
+#fomatando a saida
+linha = str()
+objetiva = "min:"
+lista = cezinho.values()
+lista2 = cezinho.keys()
 
-for i in range(0,len(azinho)):
-    nokeys.append(azinho[i].values())
+for i in range(0,e*2):
+    objetiva = objetiva+str(lista[i])+"x"+str(lista2[i])+" "
+objetiva = objetiva+";"
+print(objetiva)
 
-nokeys2.append(cezinho.values())
-
-#as entradas e as saidas são uma soma, arruma com o -1
-azinho = np.copy(nokeys)
-#azinho[ini-1] = -1 * azinho[ini-1]
-
-cezinho = np.copy(nokeys2[0])
-#restrições
-a = azinho
-#respostas das equações das restrições
-b = bezinho
-#função objetivo
-c = cezinho
-
-
-#print(nos.keys())
-#print(azinho)
-#print(bezinho)
-#print(cezinho)
-
-
-from scipy.optimize import linprog
-res = linprog(c, A_eq=a, b_eq=b, method='simplex',bounds=(None,None),options={'presolve':False})
-listax = res.x
-resposta = 0
-
-# aqui eu calculo com os pesos e os X absolutos
-for i in range(0,e):
-    resposta = resposta + abs(listax[i]) * int(c[i])
-
-print(resposta)
+for i in range(0,n):
+    for j in range(0,n):
+        if int(azinho[i][j]) != 0:
+            linha = linha+" x"+str(i+1)+str(j+1)+" "
+            linha = linha+"- x"+str(j+1)+str(i+1)+" "
+    linha= linha+"= "+str(bezinho[i])+";"+"\n"
+print(linha)
