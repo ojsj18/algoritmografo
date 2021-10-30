@@ -22,7 +22,7 @@ del(entrada[0:3])
 lista = np.copy(entrada)
 #b tem saida um apenas na entrada e na saida, onde a soma das entradas e das saidas tem que ser ==1
 bezinho = np.zeros(n,int)
-bezinho[ini-1]= -1*peso
+bezinho[ini-1]= peso
 bezinho[fim-1]= peso
 
 azinho = np.zeros((n,n),int)
