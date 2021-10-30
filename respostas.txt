@@ -1,0 +1,12 @@
+exemplo = 50 
+grafodaimagem = 90
+exemploinvertido = 50
+começadomeio 50
+grafodesorientado = 90
+grafoforadeordem = 90
+grafoforadeordem2 =  50
+grafosentidotrocado = 80
+grafovariaspontas = 15
+1custo50-1-2-3 = 50
+2custo50-1-2-4-3-5-6 = 50
+3custo18-1-6-4-2 = 18 

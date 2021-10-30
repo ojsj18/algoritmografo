@@ -57,7 +57,11 @@ print(objetiva)
 for i in range(0,n):
     for j in range(0,n):
         if int(azinho[i][j]) != 0:
-            linha = linha+" x"+str(i+1)+str(j+1)+" "
-            linha = linha+"- x"+str(j+1)+str(i+1)+" "
+            if i > j :
+                linha = linha+" -x"+str(i+1)+str(j+1)+" "
+                linha = linha+" x"+str(j+1)+str(i+1)+" "
+            else:
+                linha = linha+" -x"+str(i+1)+str(j+1)+" "
+                linha = linha+" x"+str(j+1)+str(i+1)+" "
     linha= linha+"= "+str(bezinho[i])+";"+"\n"
 print(linha)
