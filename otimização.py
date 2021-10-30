@@ -22,7 +22,7 @@ del(entrada[0:3])
 lista = np.copy(entrada)
 #b tem saida um apenas na entrada e na saida, onde a soma das entradas e das saidas tem que ser ==1
 bezinho = np.zeros(n,int)
-bezinho[ini-1]= peso
+bezinho[ini-1]= -1*peso
 bezinho[fim-1]= peso
 
 azinho = np.zeros((n,n),int)
@@ -37,13 +37,12 @@ for i in range (0,len(lista),3):
     z = str(aux[1]+aux[0])
     for no in range(1,n+1):
         if int(aux[0])==no:
-            azinho[no-1][k-1]= -1 
+            azinho[no-1][k-1]= 1 
         if int(aux[1])==no:
             azinho[k-1][j-1]= 1
     cezinho[x]=aux[2]
     cezinho[z]=aux[2]
 
-print(azinho)
 #fomatando a saida
 linha = str()
 objetiva = "min:"
@@ -58,11 +57,7 @@ print(objetiva)
 for i in range(0,n):
     for j in range(0,n):
         if int(azinho[i][j]) != 0:
-            if int(azinho[i][j]== -1):
-                linha = linha+" x"+str(i+1)+str(j+1)+" "
-                linha = linha+"- x"+str(j+1)+str(i+1)+" "
-            else:
-                linha = linha+" x"+str(j+1)+str(i+1)+" "
-                linha = linha+"- x"+str(i+1)+str(j+1)+" "
+            linha = linha+" x"+str(i+1)+str(j+1)+" "
+            linha = linha+"- x"+str(j+1)+str(i+1)+" "
     linha= linha+"= "+str(bezinho[i])+";"+"\n"
 print(linha)
